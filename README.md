@@ -7,6 +7,7 @@ Esta base de datos está diseñada para gestionar una tienda de ropa en línea. 
 
 # **Diagrama de entidad relación de la base de datos** (dejo un pdf con el diagrama hecho en dbdiagram.io)
 
+```plaintext
 +-------------------+       +-----------------+        +------------------------+
 |      Product      |       |   ProductCategory |      |         Customer       |
 +-------------------+       +-----------------+        +------------------------+
