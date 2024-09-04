@@ -1,13 +1,20 @@
-# **PreEntrega1-SQL**
-**Primer entregable curso CoderHouse comisión 57190  
+# **EntregaFinal-SQL**
+**Entrega Final del curso CoderHouse comisión 57190  
 Profesor Anderson Ocaña**
 
 # **Descripción:**
 Esta base de datos está diseñada para gestionar una tienda de ropa en línea. La base de datos almacenará información sobre los productos disponibles, los clientes que compran en la tienda, los pedidos realizados por los clientes, y los detalles de cada pedido.
 
+# **Introducción**
+Este documento proporciona una descripción detallada del esquema de la base de datos para la gestión de una tienda de ropa en línea. Incluye un diagrama de entidad-relación (ER), una lista de tablas con sus respectivos campos y una guía para la instalación y configuración de la base de datos. Este proyecto tiene como objetivo gestionar de manera eficiente productos, clientes, pedidos, y otros aspectos clave de la tienda, permitiendo una administración efectiva de inventarios, ventas y clientes.
+
+# **Objetivo**
+El objetivo de este proyecto es implementar una base de datos relacional que permita gestionar todos los aspectos relacionados con una tienda de ropa en línea. Esto incluye la administración de productos, categorías, clientes, pedidos, direcciones de envío, métodos de pago, y otros componentes relevantes. La base de datos está diseñada para facilitar la gestión eficiente de inventarios, realizar un seguimiento de los pedidos y proporcionar una base sólida para futuras integraciones y funcionalidades adicionales.
+
+
 # **Diagrama de entidad relación de la base de datos** (dejo un pdf con el diagrama hecho en dbdiagram.io)
 
-```plaintext
+```
 +-------------------+       +-----------------+        +------------------------+
 |      Product      |       |   ProductCategory |      |         Customer       |
 +-------------------+       +-----------------+        +------------------------+
@@ -41,7 +48,7 @@ Esta base de datos está diseñada para gestionar una tienda de ropa en línea. 
                                 +-------------------+     +------------------------+
 
 +------------------------+      +------------------------+      +------------------------+ 
-|       Discount         |      |       Inventory        |      |       Supplier         |
+|     Discount           |      |       Inventory        |      |       Supplier         |
 +------------------------+      +------------------------+      +------------------------+ 
 | discount_id            |      | inventory_id           |      | supplier_id            |
 | code                   |      | product_id             |      | name                   |
@@ -62,6 +69,28 @@ Esta base de datos está diseñada para gestionar una tienda de ropa en línea. 
 | supply_price           |      +------------------------+  
 | supply_date            |  
 +------------------------+  
+
++------------------------+      +------------------------+      +------------------------+  
+|  CustomerLoyalty       |      |       GiftCard         |      |   LoyaltyProgram       |  
++------------------------+      +------------------------+      +------------------------+  
+| loyalty_id             |      | gift_card_id           |      | loyalty_program_id     |  
+| customer_id            |      | code                   |      | name                   |  
+| loyalty_points         |      | balance                |      | description            |  
+| last_update            |      | issue_date             |      | points_required        |  
++------------------------+      | expiration_date        |      +------------------------+  
+                                 | customer_id            |  
+                                 +------------------------+  
+
++------------------------+  
+| GiftCardTransaction    |  
++------------------------+  
+| transaction_id         |  
+| gift_card_id           |  
+| transaction_date       |  
+| amount                 |  
+| transaction_type       |  
++------------------------+  
+
 
 # Listado de las tablas que comprenden la base de datos
 
@@ -143,7 +172,9 @@ Esta base de datos está diseñada para gestionar una tienda de ropa en línea. 
   - `discount_percentage` (Porcentaje de descuento, tipo: DECIMAL(5, 2))
   - `start_date` (Fecha de inicio, tipo: DATETIME)
   - `end_date` (Fecha de finalización, tipo: DATETIME)
-
+  - `minimum_purchase_amount` (Monto mínimo de compra requerido, tipo: DECIMAL(10, 2))
+  - `status` (Estado del descuento, tipo VARCHAR(50) NOT NULL)
+  
 ## Tabla: Reseñas de Productos (ProductReview)
 - **Descripción:** Almacena las reseñas de los productos hechas por los clientes.
 - **Campos:**
@@ -189,4 +220,40 @@ Esta base de datos está diseñada para gestionar una tienda de ropa en línea. 
   - `wishlist_id` (ID de la lista de deseos, tipo: INT, clave primaria)
   - `customer_id` (ID del cliente, tipo: INT, clave foránea)
   - `product_id` (ID del producto, tipo: INT, clave foránea)
+  
 
+## **Instrucciones de Ejecución**
+
+1. **Instalación y Configuración**:
+   - Asegúrate de tener MySQL instalado en tu sistema.
+   - Crea una base de datos llamada `TiendaRopa` si no existe.
+   - Conéctate a tu servidor MySQL usando un cliente como MySQL Workbench o la línea de comandos.
+
+2. **Ejecución de Scripts SQL**:
+   - Descarga el archivo `Tables-Database.sql` proporcionado.
+   - Ejecuta el script SQL en el cliente de base de datos.
+     ```sql
+     source path/to/your/Tables-Database.sql;
+     ```
+
+3. **Estructura del Proyecto**:
+   - Asegúrate de que todos los scripts SQL estén organizados en carpetas según su función (e.g., `tables`, `views`, `procedures`, etc.).
+   - La estructura modular del proyecto ayuda a evitar un código "espagueti" y facilita el mantenimiento y actualización.
+
+4. **Archivos CSV y SQL**:
+   - Si tienes archivos CSV con datos iniciales, asegúrate de que coincidan con el esquema de la base de datos antes de importarlos (en mi caso no pude hacerlo de ninguna forma, tuve que hacerlo manual uno por uno).
+   - Utiliza comandos de MySQL como `LOAD DATA INFILE` para importar datos desde CSV si es necesario.
+
+5. **Documentación Adicional**:
+   - Consulta el diagrama ER en formato PDF para una visualización gráfica de las relaciones entre tablas.
+   - Lee el archivo `README.md` y `Tables-Database.sql` para detalles adicionales sobre el esquema y las relaciones.
+
+## Módulos y Organización del Código
+
+Para garantizar una estructura modular, los siguientes módulos deben ser implementados y organizados adecuadamente:
+
+- **Módulos de Datos**: Scripts para la creación de tablas, vistas, procedimientos almacenados y triggers.
+- **Módulos de Importación**: Scripts para importar datos desde archivos CSV u otros formatos (en mi caso no pude hacerlo de ninguna forma, tuve que hacerlo manual uno por uno).
+- **Módulos de Funcionalidad**: Scripts y procedimientos que gestionan la lógica del negocio (e.g., cálculos de descuento, actualizaciones de stock).
+
+---
