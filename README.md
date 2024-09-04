@@ -220,7 +220,43 @@ El objetivo de este proyecto es implementar una base de datos relacional que per
   - `wishlist_id` (ID de la lista de deseos, tipo: INT, clave primaria)
   - `customer_id` (ID del cliente, tipo: INT, clave foránea)
   - `product_id` (ID del producto, tipo: INT, clave foránea)
-  
+
+## Tabla: Lealtad del Cliente (CustomerLoyalty)
+- **Descripción:** Almacena información sobre los puntos de lealtad de los clientes.
+- **Campos:**
+  - `loyalty_id` (ID de lealtad, tipo: INT, clave primaria)
+  - `customer_id` (ID del cliente, tipo: INT, clave foránea)
+  - `loyalty_points` (Puntos de lealtad, tipo: INT)
+  - `last_update` (Última actualización, tipo: DATETIME)
+
+## Tabla: Tarjeta de Regalo (GiftCard)
+- **Descripción:** Almacena información sobre las tarjetas de regalo.
+- **Campos:**
+  - `gift_card_id` (ID de la tarjeta de regalo, tipo: INT, clave primaria)
+  - `code` (Código de la tarjeta, tipo: VARCHAR(50))
+  - `balance` (Saldo de la tarjeta, tipo: DECIMAL(10, 2))
+  - `issue_date` (Fecha de emisión, tipo: DATETIME)
+  - `expiration_date` (Fecha de vencimiento, tipo: DATETIME)
+  - `customer_id` (ID del cliente, tipo: INT, clave foránea)
+
+## Tabla: Programa de Lealtad (LoyaltyProgram)
+- **Descripción:** Almacena información sobre los programas de lealtad.
+- **Campos:**
+  - `loyalty_program_id` (ID del programa de lealtad, tipo: INT, clave primaria)
+  - `name` (Nombre del programa, tipo: VARCHAR(255))
+  - `description` (Descripción del programa, tipo: VARCHAR(255))
+  - `points_required` (Puntos requeridos, tipo: INT)
+
+## Tabla: Transacción de Tarjeta de Regalo (GiftCardTransaction)
+- **Descripción:** Almacena información sobre las transacciones realizadas con tarjetas de regalo.
+- **Campos:**
+  - `transaction_id` (ID de la transacción, tipo: INT, clave primaria)
+  - `gift_card_id` (ID de la tarjeta de regalo, tipo: INT, clave foránea)
+  - `transaction_date` (Fecha de la transacción, tipo: DATETIME)
+  - `amount` (Monto de la transacción, tipo: DECIMAL(10, 2))
+  - `transaction_type` (Tipo de transacción, tipo: VARCHAR(50))
+
+
 
 ## **Instrucciones de Ejecución**
 
@@ -241,7 +277,7 @@ El objetivo de este proyecto es implementar una base de datos relacional que per
    - La estructura modular del proyecto ayuda a evitar un código "espagueti" y facilita el mantenimiento y actualización.
 
 4. **Archivos CSV y SQL**:
-   - Si tienes archivos CSV con datos iniciales, asegúrate de que coincidan con el esquema de la base de datos antes de importarlos (en mi caso no pude hacerlo de ninguna forma, tuve que hacerlo manual uno por uno).
+   - Si tenes archivos CSV con datos iniciales, asegúrate de que coincidan con el esquema de la base de datos antes de importarlos (en mi caso no pude hacerlo de ninguna forma, tuve que hacerlo manual uno por uno).
    - Utiliza comandos de MySQL como `LOAD DATA INFILE` para importar datos desde CSV si es necesario.
 
 5. **Documentación Adicional**:
